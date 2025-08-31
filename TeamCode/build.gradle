@@ -27,18 +27,16 @@ repositories {
     maven {
         url = 'https://maven.brott.dev/'
     }
-    maven {
-        url= "https://maven.pedropathing.com/"
-    }
+
     maven {
         url "https://repo.dairy.foundation/releases"
     }
 
-    /* Only if you are using a Snapshot/Beta Version of SolversLib
+    // Fpr Snapshot/Beta Versions of SolversLib
     maven {
         url "https://repo.dairy.foundation/snapshots"
     }
-     */
+
 }
 
 dependencies {
@@ -46,14 +44,8 @@ dependencies {
     annotationProcessor files('lib/OpModeAnnotationProcessor.jar')
 
     // SolversLib
-    implementation "org.solverslib:core:0.3.1" // core
-    implementation "org.solverslib:pedroPathing:0.3.1" // pedroPathing
+    implementation "org.solverslib:core:SNAPSHOT-7cdcc66" // core
+    implementation "org.solverslib:pedroPathing:SNAPSHOT-7cdcc66" // pedroPathing
 
-    // Pedro Pathing
-    implementation "com.pedropathing:pedro:1.0.9" // Pedro Pathing Library
-    implementation "com.acmerobotics.dashboard:dashboard:0.4.16" // FTC Dashboard
-    //noinspection GradleDependency
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.7'
-    //noinspection GradleDependency
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.4.21'
+    implementation "com.acmerobotics.dashboard:dashboard:0.4.17" // FTC Dashboard
 }
