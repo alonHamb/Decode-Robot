@@ -4,13 +4,14 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.seattlesolvers.solverslib.command.CommandOpMode
 import com.seattlesolvers.solverslib.gamepad.GamepadEx
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys
+import org.firstinspires.ftc.teamcode.alonlib.units.Alliance
 import org.firstinspires.ftc.teamcode.commands.exampleInstantCommand
 import org.firstinspires.ftc.teamcode.commands.printCommand
 import org.firstinspires.ftc.teamcode.subsystems.ExampleSubsystem
 
 @TeleOp(name = "Blue Main Teleop", group = "Teleop")
 class BlueMainTeleop : CommandOpMode() {
-
+    var alliance: Alliance = Alliance.Blue
     lateinit var controllerA: GamepadEx
     lateinit var controllerB: GamepadEx
     private lateinit var exampleSubsystem: ExampleSubsystem
