@@ -4,12 +4,14 @@ import com.acmerobotics.dashboard.FtcDashboard
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.seattlesolvers.solverslib.command.CommandOpMode
 import org.firstinspires.ftc.teamcode.RobotContainer
+import org.firstinspires.ftc.teamcode.alonlib.units.Alliance
 
 @TeleOp(name = "Blue Main Teleop", group = "Teleop")
 class BlueMainTeleop : CommandOpMode() {
     override fun initialize() {
+        val alliance = Alliance.Blue
         FtcDashboard.getInstance().telemetry.addLine("Robot initializing")
-        RobotContainer(hardwareMap, FtcDashboard.getInstance().telemetry, gamepad1, gamepad2)
+        RobotContainer(hardwareMap,FtcDashboard.getInstance().telemetry, gamepad1, gamepad2,alliance)
         FtcDashboard.getInstance().telemetry.update()
         updateTelemetry(telemetry)
 
