@@ -32,8 +32,5 @@ dependencies {
     implementation libs.solverslib.core
     implementation project(':FtcRobotController')
     implementation libs.androidx.core.ktx
-    // Pinned to a commit SHA instead of the v1.0.1 tag because JitPack cached a
-    // "tag not found" result before the tag existed. Switch to 'v1.0.1' once
-    // https://jitpack.io/com/github/alonHamb/AlonLib/v1.0.1 resolves cleanly.
-    implementation 'com.github.alonHamb:AlonLib:34e1cb8'
+    implementation 'com.github.alonHamb:AlonLib:v1.0.1'
 }
