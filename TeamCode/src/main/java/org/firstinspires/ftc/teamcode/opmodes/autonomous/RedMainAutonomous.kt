@@ -8,6 +8,7 @@ import com.seattlesolvers.solverslib.command.CommandOpMode
 import org.firstinspires.ftc.teamcode.RobotContainer
 import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
 import org.firstinspires.ftc.teamcode.alonlib.commands.asCommand
+import org.firstinspires.ftc.teamcode.alonlib.throttleTo
 import org.firstinspires.ftc.teamcode.alonlib.units.Alliance
 
 /**
@@ -24,7 +25,9 @@ class RedMainAutonomous : CommandOpMode() {
         hub = hardwareMap.get(LynxModule::class.java, "Control Hub").apply {
             bulkCachingMode = LynxModule.BulkCachingMode.MANUAL
         }
+        val telemetryLevel = TelemetryLevel.Testing
         telemetry = MultipleTelemetry(telemetry, FtcDashboard.getInstance().telemetry)
+        telemetry.throttleTo(telemetryLevel)
         telemetry.addLine("Robot initializing")
 
         val robotContainer = RobotContainer(
@@ -33,7 +36,7 @@ class RedMainAutonomous : CommandOpMode() {
             gamepad1,
             gamepad2,
             Alliance.Red,
-            TelemetryLevel.Testing
+            telemetryLevel
         )
         telemetry.update()
 
