@@ -15,9 +15,10 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { url = 'https://maven.brott.dev/' }
         maven { url = "https://repo.dairy.foundation/releases" }
+        maven { url = "https://jitpack.io" }
     }
 }
 
-rootProject.name = "FtcRobotController"
+rootProject.name = "DecodeRobot"
 include ':FtcRobotController'
 include ':TeamCode'
