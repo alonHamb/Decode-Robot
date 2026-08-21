@@ -28,7 +28,6 @@ class LocalizerSubsystem(
 
     val pinPoint = HaPinPoint(hardwareMap, PINPOINT_ID, PINPOINT_ODOMETRY_PODS)
 
-    val imu: GyroSensor = hardwareMap.gyroSensor.get("imu")
     // --- state getters and setters ---
 
     var currentLocalizer = PinPoint
@@ -84,4 +83,3 @@ class LocalizerSubsystem(
         updateTelemetry()
     }
 }
-

@@ -15,7 +15,13 @@ apply from: '../build.dependencies.gradle'
 
 android {
     namespace = 'org.firstinspires.ftc.teamcode'
-    
+    testOptions {
+        unitTests {
+            returnDefaultValues = true
+        }
+    }
+
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -32,5 +38,13 @@ dependencies {
     implementation libs.solverslib.core
     implementation project(':FtcRobotController')
     implementation libs.androidx.core.ktx
-    implementation 'com.github.alonHamb:AlonLib:v1.2.0'
+    implementation libs.alonlib
+    testImplementation libs.alonlib.emulator
+
+}
+tasks.register("runEmulator", JavaExec) {
+    group = "verification"
+    dependsOn("assembleDebugUnitTest")
+    classpath = tasks.named("testDebugUnitTest", Test).get().classpath
+    mainClass = "org.firstinspires.ftc.teamcode.alonlib.emulator.EmulatorAutoLauncherKt"
 }

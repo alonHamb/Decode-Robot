@@ -18,7 +18,7 @@ class BlueMainTeleop : CommandOpMode() {
         }
         val alliance = Alliance.Blue
         val telemetryLevel = TelemetryLevel.Testing
-        telemetry = MultipleTelemetry(telemetry, FtcDashboard.getInstance().telemetry)
+        //telemetry = MultipleTelemetry(telemetry, FtcDashboard.getInstance().telemetry)
         telemetry.addLine("Robot initializing")
         RobotContainer(
             hardwareMap,

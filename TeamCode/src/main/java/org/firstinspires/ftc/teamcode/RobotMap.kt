@@ -15,24 +15,24 @@ object RobotMap {
      */
 
     object Drive {
-        const val PINPOINT_ID = "pinpoint"
-        const val FRONT_LEFT_MOTOR_ID = "front left motor" // port _ on the control hub
-        const val FRONT_RIGHT_MOTOR_ID = "front right motor" // port _ on the control hub
-        const val BACK_LEFT_MOTOR_ID = "back left motor" // port _ on the control hub
-        const val BACK_RIGHT_MOTOR_ID = "back right motor" // port _ on the control hub
+        const val PINPOINT_ID = "pinpoint" // port 1 on the control hub
+        const val FRONT_LEFT_MOTOR_ID = "front left motor" // port 0 on the control hub
+        const val FRONT_RIGHT_MOTOR_ID = "front right motor" // port 1 on the control hub
+        const val BACK_LEFT_MOTOR_ID = "back left motor" // port 2 on the control hub
+        const val BACK_RIGHT_MOTOR_ID = "back right motor" // port 3 on the control hub
 
         val DRIVE_MOTOR_TYPE = Motor.GoBILDA.RPM_435
     }
 
     object Shooter {
-        const val TOP_FLYWHEEL_MOTOR_ID = "flywheel motor" // port 0 on the control hub
+        const val TOP_FLYWHEEL_MOTOR_ID = "flywheel motor" // port 0 on the expansion hub
         val TOP_FLYWHEEL_MOTOR_TYPE = Motor.GoBILDA.BARE
 
-        const val BOTTOM_FLYWHEEL_MOTOR_ID = "bottom flywheel motor" // port 1 on the control hub
+        const val BOTTOM_FLYWHEEL_MOTOR_ID = "bottom flywheel motor" // port 1 on the expansion hub
 
         val BOTTOM_FLYWHEEL_MOTOR_TYPE = Motor.GoBILDA.BARE
 
-        const val HEADING_MOTOR_ID = "heading motor"   // port 2 on the control hub
+        const val HEADING_MOTOR_ID = "heading motor"   // port 2 on the expansion hub
         val HEADING_MOTOR_TYPE = Motor.GoBILDA.RPM_435
         const val HOOD_SERVO_ID = "hood servo"    // servo port 0 on the control hub
 
@@ -44,12 +44,12 @@ object RobotMap {
     }
 
     object Intake {
-        const val INTAKE_MOTOR_ID = "intake motor" // port 4 on the control hub
+        const val INTAKE_MOTOR_ID = "intake motor" // port 4 on the expansion hub
         val INTAKE_MOTOR_TYPE = Motor.GoBILDA.RPM_1150
     }
 
     object Vision {
-        const val LIMELIGHT_ID = "limelight"
+        const val LIMELIGHT_ID = "limelight" // usb port
     }
 
 

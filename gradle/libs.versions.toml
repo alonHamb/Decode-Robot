@@ -1,5 +1,7 @@
 [versions]
 agp = "9.1.0"
+alonlib = "v11.1.2"
+alonlibEmulator = "v11.1.2"
 kotlin = "1.9.24"
 ftc-sdk = "11.1.0"
 dashboard = "0.5.1"
@@ -15,6 +17,8 @@ targetSdk = "34"
 
 [libraries]
 # FTC SDK
+alonlib = { module = "com.github.alonHamb:AlonLib", version.ref = "alonlib" }
+alonlib-emulator = { module = "com.github.alonHamb.AlonLib:alonlib-emulator", version.ref = "alonlibEmulator" }
 ftc-inspection = { group = "org.firstinspires.ftc", name = "Inspection", version.ref = "ftc-sdk" }
 ftc-blocks = { group = "org.firstinspires.ftc", name = "Blocks", version.ref = "ftc-sdk" }
 ftc-robotcore = { group = "org.firstinspires.ftc", name = "RobotCore", version.ref = "ftc-sdk" }
