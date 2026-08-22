@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode
 
 import com.qualcomm.robotcore.hardware.HardwareMap
 import com.seattlesolvers.solverslib.hardware.motors.Motor
+import emulator.config.RobotConfig
 import emulator.config.robotConfig
 
 object RobotMap {
@@ -18,6 +19,7 @@ object RobotMap {
 
     object Drive {
         const val PINPOINT_ID = "pinpoint" // port 1 on the control hub
+        const val PINPOINT_PORT = "1"
         const val FRONT_LEFT_MOTOR_ID = "front left motor" // port 0 on the control hub
         const val FRONT_RIGHT_MOTOR_ID = "front right motor" // port 1 on the control hub
         const val BACK_LEFT_MOTOR_ID = "back left motor" // port 2 on the control hub
@@ -53,6 +55,8 @@ object RobotMap {
     object Vision {
         const val LIMELIGHT_ID = "limelight" // usb port
     }
+
+
 
 
 }

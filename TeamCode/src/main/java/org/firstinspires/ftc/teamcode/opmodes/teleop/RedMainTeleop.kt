@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.seattlesolvers.solverslib.command.CommandOpMode
 import org.firstinspires.ftc.teamcode.RobotContainer
 import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
+import org.firstinspires.ftc.teamcode.alonlib.emulator.EmuTelemetry
 import org.firstinspires.ftc.teamcode.alonlib.units.Alliance
 
 @TeleOp(name = "Red Main Teleop", group = "Teleop")
@@ -18,7 +19,7 @@ class RedMainTeleop : CommandOpMode() {
         }
         val alliance = Alliance.Red
         val telemetryLevel = TelemetryLevel.Testing
-        //telemetry = MultipleTelemetry(telemetry, FtcDashboard.getInstance().telemetry)
+        telemetry = EmuTelemetry()
         telemetry.addLine("Robot initializing")
         RobotContainer(
             hardwareMap,

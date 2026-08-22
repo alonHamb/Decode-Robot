@@ -1,7 +1,7 @@
 [versions]
 agp = "9.1.0"
 alonlib = "v11.1.2"
-alonlibEmulator = "v1.1.0"
+alonlibEmulator = "v11.1.2"
 kotlin = "1.9.24"
 ftc-sdk = "11.1.0"
 dashboard = "0.5.1"
