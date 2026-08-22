@@ -2,15 +2,15 @@ package org.firstinspires.ftc.teamcode
 
 import com.qualcomm.robotcore.hardware.Gamepad
 import com.qualcomm.robotcore.hardware.HardwareMap
-import com.seattlesolvers.solverslib.command.ParallelCommandGroup
-import com.seattlesolvers.solverslib.command.Robot
-import com.seattlesolvers.solverslib.command.button.GamepadButton
-import com.seattlesolvers.solverslib.command.button.Trigger
-import com.seattlesolvers.solverslib.gamepad.GamepadEx
-import com.seattlesolvers.solverslib.gamepad.GamepadKeys
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
+import org.firstinspires.ftc.teamcode.alonlib.commands.ParallelCommandGroup
+import org.firstinspires.ftc.teamcode.alonlib.commands.button.GamepadButton
+import org.firstinspires.ftc.teamcode.alonlib.commands.button.Trigger
+import org.firstinspires.ftc.teamcode.alonlib.gamepad.GamepadEx
+import org.firstinspires.ftc.teamcode.alonlib.gamepad.GamepadKeys
 import org.firstinspires.ftc.teamcode.alonlib.units.Alliance
+import org.firstinspires.ftc.teamcode.alonlib.units.fraction
 import org.firstinspires.ftc.teamcode.commands.ShootingDefaultCommand
 import org.firstinspires.ftc.teamcode.commands.changeModeCommand
 import org.firstinspires.ftc.teamcode.commands.defaultIntakeCommand
@@ -37,7 +37,7 @@ class RobotContainer(
     gamepad2: Gamepad,
     val alliance: Alliance,
     telemetryLevel: TelemetryLevel
-) : Robot() {
+) {
     val controllerA = GamepadEx(gamepad1)
     val controllerB = GamepadEx(gamepad2)
 
@@ -59,7 +59,7 @@ class RobotContainer(
         intakeSubsystem.intakeCommand(
             controllerA.getTrigger(
                 GamepadKeys.Trigger.LEFT_TRIGGER
-            )
+            ).fraction
         ), transferSubsystem.intakeCommand(
             controllerA.getTrigger(
                 GamepadKeys.Trigger.LEFT_TRIGGER
@@ -69,9 +69,9 @@ class RobotContainer(
 
     val ejectCommandGroup = ParallelCommandGroup(
         intakeSubsystem.intakeCommand(
-            -controllerA.getTrigger(
+            (-controllerA.getTrigger(
                 GamepadKeys.Trigger.RIGHT_TRIGGER
-            )
+            )).fraction
         ), transferSubsystem.intakeCommand(
             -controllerA.getTrigger(
                 GamepadKeys.Trigger.RIGHT_TRIGGER
@@ -118,11 +118,11 @@ class RobotContainer(
     }
 
     fun setDefaultCommands() {
-        driveSubsystem.defaultCommand = driveSubsystem.driveFieldCentricCommand(
+        driveSubsystem.setDefaultCommand(driveSubsystem.driveFieldCentricCommand(
             { controllerA.leftX },
-            { controllerA.leftY }) { controllerA.rightX }
-        intakeSubsystem.defaultCommand = intakeSubsystem.defaultIntakeCommand()
-        transferSubsystem.defaultCommand = transferSubsystem.defaultTransferCommand()
-        shooterSubsystem.defaultCommand = shooterSubsystem.ShootingDefaultCommand(alliance)
+            { controllerA.leftY }) { controllerA.rightX })
+        intakeSubsystem.setDefaultCommand(intakeSubsystem.defaultIntakeCommand())
+        transferSubsystem.setDefaultCommand(transferSubsystem.defaultTransferCommand())
+        shooterSubsystem.setDefaultCommand(shooterSubsystem.ShootingDefaultCommand(alliance))
     }
 }

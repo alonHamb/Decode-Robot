@@ -7,7 +7,7 @@ import com.acmerobotics.roadrunner.Rotation2d
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder
 import com.acmerobotics.roadrunner.Vector2d
 import com.qualcomm.robotcore.hardware.HardwareMap
-import com.seattlesolvers.solverslib.command.SubsystemBase
+import org.firstinspires.ftc.teamcode.alonlib.commands.SubsystemBase
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
 import org.firstinspires.ftc.teamcode.alonlib.units.toRoadRunner
@@ -67,7 +67,7 @@ class DriveSubsystem(
             TelemetryLevel.Competition -> {}
             TelemetryLevel.Testing     -> {
                 telemetry.addLine("--- Drive subsystem ---")
-                telemetry.addData("Running Command", super.currentCommand)
+                telemetry.addData("Running Command", super.currentCommand())
                 val pose = mecanumDrive.localizer.pose
                 telemetry.addData(
                     "Robot pose (RoadRunner)",

@@ -2,14 +2,14 @@ package org.firstinspires.ftc.teamcode.subsystems.vision
 
 import com.qualcomm.robotcore.hardware.GyroSensor
 import com.qualcomm.robotcore.hardware.HardwareMap
-import com.seattlesolvers.solverslib.command.SubsystemBase
-import com.seattlesolvers.solverslib.geometry.Pose2d
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
 import org.firstinspires.ftc.robotcore.external.navigation.Pose2D
 import org.firstinspires.ftc.teamcode.RobotMap.Drive.PINPOINT_ID
 import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
+import org.firstinspires.ftc.teamcode.alonlib.commands.SubsystemBase
+import org.firstinspires.ftc.teamcode.alonlib.math.geometry.Pose2d
 import org.firstinspires.ftc.teamcode.alonlib.hardware.sensors.HaPinPoint
 import org.firstinspires.ftc.teamcode.alonlib.units.distanceTo
 import org.firstinspires.ftc.teamcode.alonlib.units.horizontalAngleTo
@@ -47,7 +47,7 @@ class LocalizerSubsystem(
             latestBotPose2d.x,
             latestBotPose2d.y,
             AngleUnit.DEGREES,
-            latestBotPose2d.heading
+            latestBotPose2d.rotation.degrees
         )
     val pinPointDistanceToRedGoal get() = pinPoint.position.distanceTo(RED_GOAL_TARGET).meters
     val pinPointDistanceToBlueGoal get() = pinPoint.position.distanceTo(BLUE_GOAL_TARGET).meters

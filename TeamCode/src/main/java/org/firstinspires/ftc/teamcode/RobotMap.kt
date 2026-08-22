@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode
 
 import com.qualcomm.robotcore.hardware.HardwareMap
-import com.seattlesolvers.solverslib.hardware.motors.Motor
+import org.firstinspires.ftc.teamcode.alonlib.hardware.motors.Motor
 import emulator.config.RobotConfig
 import emulator.config.robotConfig
 

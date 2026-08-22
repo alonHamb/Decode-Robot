@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems.shooter
 
 import com.acmerobotics.dashboard.config.Config
-import com.seattlesolvers.solverslib.geometry.Rotation2d
+import org.firstinspires.ftc.teamcode.alonlib.math.geometry.Rotation2d
 import org.firstinspires.ftc.teamcode.alonlib.hardware.Data
 import org.firstinspires.ftc.teamcode.alonlib.math.LinearInterpolationTable
 import org.firstinspires.ftc.teamcode.alonlib.math.PIDFGains

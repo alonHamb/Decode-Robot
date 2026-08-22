@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems.vision
 
-import com.seattlesolvers.solverslib.geometry.Pose2d
-import com.seattlesolvers.solverslib.geometry.Translation2d
+import org.firstinspires.ftc.teamcode.alonlib.math.geometry.Pose2d
+import org.firstinspires.ftc.teamcode.alonlib.math.geometry.Translation2d
 import org.firstinspires.ftc.teamcode.alonlib.units.degrees
 import org.firstinspires.ftc.teamcode.alonlib.units.meters
 

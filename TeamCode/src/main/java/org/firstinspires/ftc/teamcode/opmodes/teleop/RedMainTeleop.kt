@@ -4,7 +4,7 @@ import com.acmerobotics.dashboard.FtcDashboard
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry
 import com.qualcomm.hardware.lynx.LynxModule
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
-import com.seattlesolvers.solverslib.command.CommandOpMode
+import org.firstinspires.ftc.teamcode.alonlib.commands.CommandOpMode
 import org.firstinspires.ftc.teamcode.RobotContainer
 import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
 import org.firstinspires.ftc.teamcode.alonlib.emulator.EmuTelemetry

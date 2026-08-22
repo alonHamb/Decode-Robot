@@ -1,16 +1,15 @@
 [versions]
 agp = "9.1.0"
-alonlib = "v11.1.2"
-alonlibEmulator = "v11.1.2"
-kotlin = "1.9.24"
+alonlib = "solverslib-removal-SNAPSHOT"
+alonlibEmulator = "solverslib-removal-SNAPSHOT"
+kotlin = "2.4.10"
 ftc-sdk = "11.1.0"
 dashboard = "0.5.1"
 appcompat = "1.7.1"
 core-ktx = "1.15.0"
-solverslib = "0.3.4"
 
 # SDK Versions
-compileSdk = "35"
+compileSdk = "36"
 minSdk = "24"
 #noinspection ExpiredTargetSdkVersion
 targetSdk = "34"
@@ -34,9 +33,6 @@ acmerobotics-dashboard = { group = "com.acmerobotics.dashboard", name = "dashboa
 # AndroidX
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
-
-# Others
-solverslib-core = { group = "org.solverslib", name = "core", version.ref = "solverslib" }
 
 [bundles]
 ftc-sdk = [

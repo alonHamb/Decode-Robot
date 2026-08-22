@@ -2,9 +2,6 @@ package org.firstinspires.ftc.teamcode.subsystems.shooter
 
 import com.acmerobotics.dashboard.config.Config
 import com.qualcomm.robotcore.hardware.HardwareMap
-import com.seattlesolvers.solverslib.command.SubsystemBase
-import com.seattlesolvers.solverslib.geometry.Rotation2d
-import com.seattlesolvers.solverslib.hardware.motors.Motor
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.teamcode.RobotMap.Shooter.BOTTOM_FLYWHEEL_MOTOR_ID
 import org.firstinspires.ftc.teamcode.RobotMap.Shooter.BOTTOM_FLYWHEEL_MOTOR_TYPE
@@ -14,14 +11,18 @@ import org.firstinspires.ftc.teamcode.RobotMap.Shooter.HOOD_SERVO_ID
 import org.firstinspires.ftc.teamcode.RobotMap.Shooter.TOP_FLYWHEEL_MOTOR_ID
 import org.firstinspires.ftc.teamcode.RobotMap.Shooter.TOP_FLYWHEEL_MOTOR_TYPE
 import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
+import org.firstinspires.ftc.teamcode.alonlib.commands.SubsystemBase
 import org.firstinspires.ftc.teamcode.alonlib.hardware.motors.HaMotor
+import org.firstinspires.ftc.teamcode.alonlib.hardware.motors.Motor
 import org.firstinspires.ftc.teamcode.alonlib.hardware.servos.HaServo
+import org.firstinspires.ftc.teamcode.alonlib.math.geometry.Rotation2d
 import org.firstinspires.ftc.teamcode.alonlib.units.Alliance
 import org.firstinspires.ftc.teamcode.alonlib.units.AngularVelocity
-import org.firstinspires.ftc.teamcode.alonlib.units.PercentOutput
+import org.firstinspires.ftc.teamcode.alonlib.units.Percentage
 import org.firstinspires.ftc.teamcode.alonlib.units.compareTo
 import org.firstinspires.ftc.teamcode.alonlib.units.degrees
 import org.firstinspires.ftc.teamcode.alonlib.units.div
+import org.firstinspires.ftc.teamcode.alonlib.units.fraction
 import org.firstinspires.ftc.teamcode.alonlib.units.rpm
 import org.firstinspires.ftc.teamcode.subsystems.shooter.ShooterConstants.ANGLE_INTERPOLATION_TABLE
 import org.firstinspires.ftc.teamcode.subsystems.shooter.ShooterConstants.HEADING_PID_GAINS
@@ -47,9 +48,9 @@ class ShooterSubsystem(
     val localizer = LocalizerSubsystem(hardwareMap, telemetry, telemetryLevel)
     val topFlywheelMotor =
         HaMotor(hardwareMap, TOP_FLYWHEEL_MOTOR_ID, TOP_FLYWHEEL_MOTOR_TYPE).apply {
-            runMode = Motor.RunMode.VelocityControl
+            runMode = Motor.RunMode.VELOCITY_CONTROL
             zeroPowerBehavior = Motor.ZeroPowerBehavior.FLOAT
-            runningDirection = Motor.Direction.FORWARD
+            runningDirection = HaMotor.Direction.FORWARD
             tolerance = VELOCITY_TOLERANCE.asRpm
             pidfGains = VELOCITY_PID_GAINS
         }
@@ -62,14 +63,14 @@ class ShooterSubsystem(
             pidfGains = topFlywheelMotor.pidfGains
         }
     val headingMotor = HaMotor(hardwareMap, HEADING_MOTOR_ID, HEADING_MOTOR_TYPE).apply {
-        runMode = Motor.RunMode.PositionControl
+        runMode = Motor.RunMode.POSITION_CONTROL
         zeroPowerBehavior = Motor.ZeroPowerBehavior.BRAKE
-        runningDirection = Motor.Direction.FORWARD
+        runningDirection = HaMotor.Direction.FORWARD
         tolerance = HEADING_TOLERANCE.degrees
         pidfGains = HEADING_PID_GAINS
     }
     val hoodServo = HaServo(hardwareMap, HOOD_SERVO_ID, HOOD_SERVO_MODE, HOOD_SERVO_TYPE).apply {
-        runningDirection = Motor.Direction.FORWARD
+        runningDirection = HaMotor.Direction.FORWARD
     }
     // --- state getters and setters ---
 
@@ -173,7 +174,7 @@ class ShooterSubsystem(
 
     // --- Testing & Manual overrides ---
 
-    fun setFlywheelMotorPower(power: PercentOutput) {
+    fun setFlywheelMotorPower(power: Percentage) {
         topFlywheelMotor.percentOutput = power
     }
 
@@ -185,9 +186,9 @@ class ShooterSubsystem(
         currentAngleSetPoint += angle
     }
 
-    fun setHeadingMotorOutput(output: PercentOutput) {
-        if (output > 0.0 && isAtMaxHeading || output < 0.0 && isAtMinHeading) {
-            headingMotor.percentOutput = 0.0
+    fun setHeadingMotorOutput(output: Percentage) {
+        if (output > 0.fraction && isAtMaxHeading || output < 0.fraction && isAtMinHeading) {
+            headingMotor.percentOutput = 0.fraction
         }
         headingMotor.percentOutput = output
     }
@@ -203,7 +204,7 @@ class ShooterSubsystem(
             TelemetryLevel.Competition -> {}
             TelemetryLevel.Testing -> {
                 telemetry.addLine("--- shooter subsystem ---")
-                telemetry.addData("running command", super.currentCommand)
+                telemetry.addData("running command", super.currentCommand())
                 telemetry.addData("current angle: ", currentAngle)
                 telemetry.addData("current heading: ", currentHeading)
                 telemetry.addData("heading setpoint: ", currentHeadingSetPoint)
