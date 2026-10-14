@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.subsystems.vision
 
-import com.qualcomm.robotcore.hardware.GyroSensor
 import com.qualcomm.robotcore.hardware.HardwareMap
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit
@@ -9,8 +8,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.Pose2D
 import org.firstinspires.ftc.teamcode.RobotMap.Drive.PINPOINT_ID
 import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
 import org.firstinspires.ftc.teamcode.alonlib.commands.SubsystemBase
-import org.firstinspires.ftc.teamcode.alonlib.math.geometry.Pose2d
 import org.firstinspires.ftc.teamcode.alonlib.hardware.sensors.HaPinPoint
+import org.firstinspires.ftc.teamcode.alonlib.math.geometry.Pose2d
 import org.firstinspires.ftc.teamcode.alonlib.units.distanceTo
 import org.firstinspires.ftc.teamcode.alonlib.units.horizontalAngleTo
 import org.firstinspires.ftc.teamcode.alonlib.units.meters
@@ -20,66 +19,70 @@ import org.firstinspires.ftc.teamcode.subsystems.vision.LocalizerConstants.BLUE_
 import org.firstinspires.ftc.teamcode.subsystems.vision.LocalizerConstants.RED_GOAL_TARGET
 
 class LocalizerSubsystem(
-    hardwareMap: HardwareMap,
-    var telemetry: Telemetry,
-    val telemetryLevel: TelemetryLevel
+	hardwareMap: HardwareMap,
+	var telemetry: Telemetry,
+	val telemetryLevel: TelemetryLevel
 ) : SubsystemBase() {
-    // --- hardware declarations ---
+	// --- hardware declarations ---
 
-    val pinPoint = HaPinPoint(hardwareMap, PINPOINT_ID, PINPOINT_ODOMETRY_PODS)
+	val pinPoint = HaPinPoint(hardwareMap, PINPOINT_ID, PINPOINT_ODOMETRY_PODS)
 
-    // --- state getters and setters ---
+	// --- state getters and setters ---
 
-    var currentLocalizer = PinPoint
+	var currentLocalizer = PinPoint
 
-    var latestBotPose2d: Pose2d
-        get() {
-            currentLocalizer = PinPoint
-            return pinPoint.position
-        }
-        set(value) {
-            pinPoint.position = value
-        }
+	var latestBotPose2d: Pose2d
+		get() {
+			currentLocalizer = PinPoint
+			return pinPoint.position
+		}
+		set(value) {
+			pinPoint.position = value
+		}
 
-    val latestBotPose2D
-        get() = Pose2D(
-            DistanceUnit.METER,
-            latestBotPose2d.x,
-            latestBotPose2d.y,
-            AngleUnit.DEGREES,
-            latestBotPose2d.rotation.degrees
-        )
-    val pinPointDistanceToRedGoal get() = pinPoint.position.distanceTo(RED_GOAL_TARGET).meters
-    val pinPointDistanceToBlueGoal get() = pinPoint.position.distanceTo(BLUE_GOAL_TARGET).meters
-    val distanceToRedTarget get() = latestBotPose2d.distanceTo(RED_GOAL_TARGET).meters
-    val angleToRedTarget get() = latestBotPose2d.horizontalAngleTo(RED_GOAL_TARGET)
-    val distanceToBlueTarget get() = latestBotPose2d.distanceTo(BLUE_GOAL_TARGET).meters
-    val angleToBlueTarget get() = latestBotPose2d.horizontalAngleTo(BLUE_GOAL_TARGET)
+	val latestBotPose2D
+		get() = Pose2D(
+			DistanceUnit.METER,
+			latestBotPose2d.x,
+			latestBotPose2d.y,
+			AngleUnit.DEGREES,
+			latestBotPose2d.rotation.degrees
+		)
+	val pinPointDistanceToRedGoal get() = pinPoint.position.distanceTo(RED_GOAL_TARGET).meters
+	val pinPointDistanceToBlueGoal get() = pinPoint.position.distanceTo(BLUE_GOAL_TARGET).meters
+	val distanceToRedTarget get() = latestBotPose2d.distanceTo(RED_GOAL_TARGET).meters
+	val angleToRedTarget get() = latestBotPose2d.horizontalAngleTo(RED_GOAL_TARGET)
+	val distanceToBlueTarget get() = latestBotPose2d.distanceTo(BLUE_GOAL_TARGET).meters
+	val angleToBlueTarget get() = latestBotPose2d.horizontalAngleTo(BLUE_GOAL_TARGET)
 
-    fun setBotPose2d(pos: Pose2d) {
-        latestBotPose2d = pos
-        pinPoint.position = pos
-    }
+	fun resetImu() {
+		pinPoint.resetIMU()
+	}
 
-    // --- telemetry ---
-    fun updateTelemetry() {
-        when (telemetryLevel) {
-            TelemetryLevel.Competition -> {}
-            TelemetryLevel.Testing -> {
-                telemetry.addLine("--- Vision Subsystem ---")
-                telemetry.addData(
-                    "current botPose2d",
-                    "(${latestBotPose2d.x},${latestBotPose2d.y})"
-                )
-                telemetry.addData("distance to red goal target", distanceToRedTarget)
-                telemetry.addData("distance to blue goal target", distanceToBlueTarget)
-            }
-        }
-    }
+	fun setBotPose2d(pos: Pose2d) {
+		latestBotPose2d = pos
+		pinPoint.position = pos
+	}
 
-    // --- periodic function ---
-    override fun periodic() {
-        pinPoint.update()
-        updateTelemetry()
-    }
+	// --- telemetry ---
+	fun updateTelemetry() {
+		when (telemetryLevel) {
+			TelemetryLevel.Competition -> {}
+			TelemetryLevel.Testing     -> {
+				telemetry.addLine("--- Vision Subsystem ---")
+				telemetry.addData(
+					"current botPose2d",
+					"(${latestBotPose2d.x},${latestBotPose2d.y})"
+				)
+				telemetry.addData("distance to red goal target", distanceToRedTarget)
+				telemetry.addData("distance to blue goal target", distanceToBlueTarget)
+			}
+		}
+	}
+
+	// --- periodic function ---
+	override fun periodic() {
+		pinPoint.update()
+		updateTelemetry()
+	}
 }

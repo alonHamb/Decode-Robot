@@ -8,6 +8,7 @@ import org.firstinspires.ftc.teamcode.alonlib.commands.CommandOpMode
 import org.firstinspires.ftc.teamcode.RobotContainer
 import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
 import org.firstinspires.ftc.teamcode.alonlib.commands.asCommand
+import org.firstinspires.ftc.teamcode.alonlib.emulator.EmuTelemetry
 import org.firstinspires.ftc.teamcode.alonlib.throttleTo
 import org.firstinspires.ftc.teamcode.alonlib.units.Alliance
 
@@ -26,7 +27,7 @@ class RedMainAutonomous : CommandOpMode() {
             bulkCachingMode = LynxModule.BulkCachingMode.MANUAL
         }
         val telemetryLevel = TelemetryLevel.Testing
-        telemetry = MultipleTelemetry(telemetry, FtcDashboard.getInstance().telemetry)
+        telemetry = EmuTelemetry()
         telemetry.throttleTo(telemetryLevel)
         telemetry.addLine("Robot initializing")
 

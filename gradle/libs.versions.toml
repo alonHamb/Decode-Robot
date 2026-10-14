@@ -1,7 +1,7 @@
 [versions]
 agp = "9.1.0"
-alonlib = "solverslib-removal-SNAPSHOT"
-alonlibEmulator = "solverslib-removal-SNAPSHOT"
+alonlib = "v11.2.5"
+alonlibEmulator = "v11.2.4"
 kotlin = "2.4.10"
 ftc-sdk = "11.1.0"
 dashboard = "0.5.1"

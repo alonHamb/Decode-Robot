@@ -1,62 +1,120 @@
 package org.firstinspires.ftc.teamcode
 
-import com.qualcomm.robotcore.hardware.HardwareMap
-import org.firstinspires.ftc.teamcode.alonlib.hardware.motors.Motor
-import emulator.config.RobotConfig
-import emulator.config.robotConfig
+import emulator.hardware.HubId
+import emulator.hardware.SimMotor
+import org.firstinspires.ftc.teamcode.alonlib.emulator.EmulatedHub
+import org.firstinspires.ftc.teamcode.alonlib.emulator.EmulatedRobot
+import org.firstinspires.ftc.teamcode.alonlib.hardware.Data.Motors.GoBILDA
 
 object RobotMap {
 
-    /** here you set the hardware ids and motor types for your subsystems
-     * each subsystem has her own object with its devices and their ids or types
-     * an id declaration looks like this:
-     *  const val DEVICE_NAME_ID = "device name"
-     *
-     * a type declaration looks like this:
-     *
-     *  val MOTOR_NAME_TYPE = Motor.GoBILDA.type
-     */
+	/** here you set the hardware ids and motor types for your subsystems
+	 * each subsystem has her own object with its devices and their ids or types
+	 * an id declaration looks like this:
+	 *  const val DEVICE_NAME_ID = "device name"
+	 *
+	 * a type declaration looks like this:
+	 *
+	 *  val MOTOR_NAME_TYPE = Motor.GoBILDA.type
+	 */
+	object ControlHub {
 
-    object Drive {
-        const val PINPOINT_ID = "pinpoint" // port 1 on the control hub
-        const val PINPOINT_PORT = "1"
-        const val FRONT_LEFT_MOTOR_ID = "front left motor" // port 0 on the control hub
-        const val FRONT_RIGHT_MOTOR_ID = "front right motor" // port 1 on the control hub
-        const val BACK_LEFT_MOTOR_ID = "back left motor" // port 2 on the control hub
-        const val BACK_RIGHT_MOTOR_ID = "back right motor" // port 3 on the control hub
+		object Motors {
+			object Drive {
 
-        val DRIVE_MOTOR_TYPE = Motor.GoBILDA.RPM_435
-    }
+				const val FRONT_LEFT_MOTOR_ID = "front left motor" // port 0 on the control hub
+				const val FRONT_RIGHT_MOTOR_ID = "front right motor" // port 1 on the control hub
+				const val BACK_LEFT_MOTOR_ID = "back left motor" // port 2 on the control hub
+				const val BACK_RIGHT_MOTOR_ID = "back right motor" // port 3 on the control hub
 
-    object Shooter {
-        const val TOP_FLYWHEEL_MOTOR_ID = "flywheel motor" // port 0 on the expansion hub
-        val TOP_FLYWHEEL_MOTOR_TYPE = Motor.GoBILDA.BARE
+				val DRIVE_MOTOR_TYPE = GoBILDA.RPM_435
+			}
+		}
 
-        const val BOTTOM_FLYWHEEL_MOTOR_ID = "bottom flywheel motor" // port 1 on the expansion hub
+		object Servos {
+			object Transfer {
 
-        val BOTTOM_FLYWHEEL_MOTOR_TYPE = Motor.GoBILDA.BARE
+				const val LEFT_TRANSFER_SERVO_ID = "left transfer servo" // port 1 on the control hub
+				const val RIGHT_TRANSFER_SERVO_ID = "right transfer servo" // port 2 on the control hub
+			}
 
-        const val HEADING_MOTOR_ID = "heading motor"   // port 2 on the expansion hub
-        val HEADING_MOTOR_TYPE = Motor.GoBILDA.RPM_435
-        const val HOOD_SERVO_ID = "hood servo"    // servo port 0 on the control hub
+		}
 
-    }
+		object Vision {
 
-    object Transfer {
-        const val LEFT_TRANSFER_SERVO_ID = "left transfer servo" // port 1 on the control hub
-        const val RIGHT_TRANSFER_SERVO_ID = "right transfer servo" // port 2 on the control hub
-    }
+			const val LIMELIGHT_ID = "limelight" // usb port
+		}
 
-    object Intake {
-        const val INTAKE_MOTOR_ID = "intake motor" // port 4 on the expansion hub
-        val INTAKE_MOTOR_TYPE = Motor.GoBILDA.RPM_1150
-    }
+		object I2C {
 
-    object Vision {
-        const val LIMELIGHT_ID = "limelight" // usb port
-    }
+			const val PINPOINT_ID = "pinpoint"
+		}
 
+	}
 
+	object ExpansionHub {
 
+		object Motors {
+
+			object Shooter {
+
+				const val TOP_FLYWHEEL_MOTOR_ID = "flywheel motor" // port 0 on the expansion hub
+				val TOP_FLYWHEEL_MOTOR_TYPE = GoBILDA.BARE
+
+				const val BOTTOM_FLYWHEEL_MOTOR_ID = "bottom flywheel motor" // port 1 on the expansion hub
+
+				val BOTTOM_FLYWHEEL_MOTOR_TYPE = GoBILDA.BARE
+
+				const val HEADING_MOTOR_ID = "heading motor"   // port 2 on the expansion hub
+				val HEADING_MOTOR_TYPE = GoBILDA.RPM_435
+			}
+
+			object Intake {
+
+				const val INTAKE_MOTOR_ID = "intake motor" // port 4 on the expansion hub
+				val INTAKE_MOTOR_TYPE = GoBILDA.RPM_1150
+			}
+
+		}
+
+		object Servos {
+			object Shooter {
+
+				const val HOOD_SERVO_ID = "hood servo"    // servo port 0 on the expansion hub
+			}
+		}
+
+	}
+
+	val robot = EmulatedRobot(controlHub, expansionHub, EmulatedRobot.DriveWheels(SimMotor.)).apply {
+
+	}
+
+	val controlHub = EmulatedHub(
+		HubId.CONTROL,
+		mapOf(
+			0 to ControlHub.Motors.Drive.FRONT_LEFT_MOTOR_ID,
+			1 to ControlHub.Motors.Drive.FRONT_RIGHT_MOTOR_ID,
+			2 to ControlHub.Motors.Drive.BACK_LEFT_MOTOR_ID,
+			3 to ControlHub.Motors.Drive.BACK_RIGHT_MOTOR_ID
+		),
+		mapOf(
+			0 to ControlHub.Servos.Transfer.LEFT_TRANSFER_SERVO_ID,
+			1 to ControlHub.Servos.Transfer.RIGHT_TRANSFER_SERVO_ID
+		), i2cDevices = mapOf(0 to ControlHub.I2C.PINPOINT_ID)
+
+	)
+	val expansionHub = EmulatedHub(
+		HubId.EXPANSION,
+		mapOf(
+			0 to ExpansionHub.Motors.Shooter.TOP_FLYWHEEL_MOTOR_ID,
+			1 to ExpansionHub.Motors.Shooter.BOTTOM_FLYWHEEL_MOTOR_ID,
+			2 to ExpansionHub.Motors.Shooter.HEADING_MOTOR_ID,
+			3 to ExpansionHub.Motors.Intake.INTAKE_MOTOR_ID
+		),
+		mapOf(
+			0 to ExpansionHub.Servos.Shooter.HOOD_SERVO_ID
+		)
+	)
 
 }
